@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple To-Do List</title>
+
+    <!-- Basic CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .todo-container {
+            display: inline-block;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 5px;
+            min-width: 300px;
+        }
+        #taskInput {
+            width: 200px;
+            height: 25px;
+        }
+        #addBtn {
+            height: 30px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+        li {
+            padding: 5px;
+            margin: 4px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .delete-btn {
+            margin-left: 10px;
+            color: white;
+            background-color: red;
+            border: none;
+            padding: 2px 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My To-Do List</h1>
+
+    <div class="todo-container">
+        <!-- Input and button -->
+        <input type="text" id="taskInput" placeholder="Enter a new task">
+        <button id="addBtn" onclick="addTask()">Add</button>
+
+        <!-- Task list -->
+        <ul id="taskList">
+            <!-- tasks will appear here -->
+        </ul>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function addTask() {
+            var input = document.getElementById("taskInput");
+            var taskText = input.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            // create new list item
+            var li = document.createElement("li");
+            li.textContent = taskText;
+
+            // create delete button
+            var delBtn = document.createElement("button");
+            delBtn.textContent = "Delete";
+            delBtn.className = "delete-btn";
+
+            // when delete button clicked, remove this li
+            delBtn.onclick = function () {
+                li.remove();
+            };
+
+            // add button to li
+            li.appendChild(delBtn);
+
+            // add li to ul
+            document.getElementById("taskList").appendChild(li);
+
+            // clear input
+            input.value = "";
+        }
+    </script>
+
+</body>
+</html>
